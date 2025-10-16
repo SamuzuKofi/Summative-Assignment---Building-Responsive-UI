@@ -2,7 +2,7 @@ Student Finance Tracker
 
 A modern, accessible finance tracking app with Spotify-inspired design. Built with vanilla HTML, CSS, and JavaScript.
 
-Live Demo: [Your GitHub Pages URL]
+Live Demo: https://samuzukofi.github.io/Summative-Assignment---Building-Responsive-UI/
 Theme Choice
 
 Student Finance Tracker - Track expenses, manage budgets, and analyze spending patterns.
