@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Student Finance Tracker - Manage your student budget and expenses">
+    <title>Student Finance Tracker</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="container">
+            <h1> < > Finance Tracker</h1>
+        </div>
+    </header>
+
+    <nav aria-label="Main navigation">
+        <div class="container">
+            <ul class="nav-list">
+                <li><a href="#dashboard" class="nav-link active" data-page="dashboard">Dashboard</a></li>
+                <li><a href="#transactions" class="nav-link" data-page="transactions">Transactions</a></li>
+                <li><a href="#add-transaction" class="nav-link" data-page="add">Add New</a></li>
+                <li><a href="#settings" class="nav-link" data-page="settings">Settings</a></li>
+                <li><a href="#about" class="nav-link" data-page="about">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <div class="container">
+            <!-- Status announcements for screen readers -->
+            <div role="status" aria-live="polite" aria-atomic="true" class="sr-only" id="status-message"></div>
+            <div role="alert" aria-live="assertive" aria-atomic="true" class="sr-only" id="alert-message"></div>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="page-section active">
+                <h2>Dashboard & Statistics</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Transactions</h3>
+                        <p class="stat-value" id="stat-total">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Spent</h3>
+                        <p class="stat-value" id="stat-spent">0.00 RWF</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Top Category</h3>
+                        <p class="stat-value" id="stat-category">-</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Last 7 Days</h3>
+                        <p class="stat-value" id="stat-week">0.00 RWF</p>
+                    </div>
+                </div>
+
+                <div class="budget-tracker">
+                    <h3>Monthly Budget Status</h3>
+                    <div class="budget-info">
+                        <p>Budget Cap: <strong id="budget-cap-display">500,000 RWF</strong></p>
+                        <p id="budget-status">Remaining: <span id="budget-remaining">50,000 RWF</span></p>
+                    </div>
+                    <div class="budget-bar">
+                        <div class="budget-progress" id="budget-progress" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3>Spending by Category</h3>
+                    <div id="category-chart" class="category-chart"></div>
+                </div>
+            </section>
+
+            <!-- Transactions Section -->
+            <section id="transactions" class="page-section">
+                <h2>All Transactions</h2>
+                
+                <div class="controls-panel">
+                    <div class="search-box">
+                        <label for="search-input">Search with Regex:</label>
+                        <input type="text" id="search-input" placeholder="e.g., coffee|tea or \.\d{2}\b">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="case-sensitive">
+                            Case Sensitive
+                        </label>
+                        <button id="clear-search" class="btn-secondary">Clear</button>
+                    </div>
+
+                    <div class="sort-controls">
+                        <label for="sort-by">Sort by:</label>
+                        <select id="sort-by">
+                            <option value="date-desc">Date (Newest)</option>
+                            <option value="date-asc">Date (Oldest)</option>
+                            <option value="desc-asc">Description (A-Z)</option>
+                            <option value="desc-desc">Description (Z-A)</option>
+                            <option value="amount-desc">Amount (High-Low)</option>
+                            <option value="amount-asc">Amount (Low-High)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table id="transactions-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Amount</th>
+                                <th>Category</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactions-body">
+                            <tr>
+                                <td colspan="5" class="empty-state">No transactions yet. Add your first transaction!</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Edit Transaction Section -->
+            <section id="add-transaction" class="page-section">
+                <h2 id="form-title">Add New Transaction</h2>
+                
+                <form id="transaction-form" novalidate>
+                    <input type="hidden" id="edit-id">
+
+                    <div class="form-group">
+                        <label for="description">Description *</label>
+                        <input type="text" id="description" required>
+                        <span class="error-message" id="error-description"></span>
+                        <span class="help-text">No leading/trailing spaces, no double spaces</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="amount">Amount *</label>
+                        <input type="text" id="amount" required>
+                        <span class="error-message" id="error-amount"></span>
+                        <span class="help-text">Format: 12.50 or 100 (max 2 decimals)</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Category *</label>
+                        <select id="category" required>
+                            <option value="">Select a category</option>
+                            <option value="Food">Food</option>
+                            <option value="Books">Books</option>
+                            <option value="Transport">Transport</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Fees">Fees</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <span class="error-message" id="error-category"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Date *</label>
+                        <input type="text" id="date" placeholder="YYYY-MM-DD">
+                        <span class="error-message" id="error-date"></span>
+                        <span class="help-text">Format: YYYY-MM-DD (e.g., 2025-10-16)</span>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary" id="submit-btn">Add Transaction</button>
+                        <button type="button" class="btn-secondary" id="cancel-btn">Cancel</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings" class="page-section">
+                <h2>Settings</h2>
+                
+                <div class="settings-group">
+                    <h3>Budget Cap</h3>
+                    <div class="form-group">
+                        <label for="budget-cap">Monthly Budget Limit</label>
+                        <input type="number" id="budget-cap" value="500" min="0" step="0.01">
+                        <button id="save-budget" class="btn-primary">Save Budget</button>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <h3>Currency Converter</h3>
+                    <p>Base Currency: Rwandan Francs (RWF)</p>
+                    <div class="currency-settings">
+                        <div class="form-group">
+                            <label for="rate-eur">EUR Exchange Rate (1 USD = ? EUR)</label>
+                            <input type="number" id="rate-eur" value="0.92" step="0.01" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="rate-gbp">GBP Exchange Rate (1 USD = ? GBP)</label>
+                            <input type="number" id="rate-gbp" value="0.79" step="0.01" min="0">
+                        </div>
+                        <button id="save-rates" class="btn-primary">Save Rates</button>
+                    </div>
+
+                    <div class="currency-converter">
+                        <h4>Quick Convert</h4>
+                        <input type="number" id="convert-amount" placeholder="Amount in USD" step="0.01">
+                        <div class="conversion-results" id="conversion-results"></div>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <h3>Categories</h3>
+                    <div id="categories-list" class="categories-list">
+                        <span class="category-tag">Food</span>
+                        <span class="category-tag">Books</span>
+                        <span class="category-tag">Transport</span>
+                        <span class="category-tag">Entertainment</span>
+                        <span class="category-tag">Fees</span>
+                        <span class="category-tag">Other</span>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <h3>Data Management</h3>
+                    <div class="data-actions">
+                        <button id="export-btn" class="btn-primary">Export to JSON</button>
+                        <label for="import-file" class="btn-secondary">Import from JSON
+                            <input type="file" id="import-file" accept=".json" style="display: none;">
+                        </label>
+                        <button id="clear-all-btn" class="btn-danger">Clear All Data</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section id="about" class="page-section">
+                <h2>About Student Finance Tracker</h2>
+                
+                <div class="about-content">
+                    <h3>Purpose</h3>
+                    <p>Student Finance Tracker helps college students manage their expenses, track spending patterns, and stay within budget. Built with accessibility and ease of use in mind, this app works entirely in your browser with no server required.</p>
+
+                    <h3>Features</h3>
+                    <ul>
+                        <li>Track transactions with categories</li>
+                        <li>Set monthly budget caps with visual indicators</li>
+                        <li>Search transactions using powerful regex patterns</li>
+                        <li>Sort and filter your spending history</li>
+                        <li>View statistics and spending trends</li>
+                        <li>Convert between USD, EUR, and GBP</li>
+                        <li>Import/export data as JSON</li>
+                        <li>Fully keyboard accessible</li>
+                    </ul>
+
+                    <h3>Keyboard Navigation</h3>
+                    <ul>
+                        <li><kbd>Tab</kbd> / <kbd>Shift+Tab</kbd> - Navigate between elements</li>
+                        <li><kbd>Enter</kbd> / <kbd>Space</kbd> - Activate buttons and links</li>
+                        <li><kbd>Esc</kbd> - Cancel edit mode</li>
+                    </ul>
+
+                    <h3>Contact</h3>
+                    <p>
+                        <strong>Developer:</strong> Sedem Amuzu<br>
+                        <strong>GitHub:</strong> <a href="https://github.com/SamuzuKofi" target="_blank">github.com/SamuzuKofi</a><br>
+                        <strong>Email:</strong> <a href="mailto:your.s.amuzu@alustudent.com">s.amuzu@alustudent.com</a>
+                    </p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+
+    <script type="module" src="scripts/app.js"></script>
+</body>
+</html>
