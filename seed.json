@@ -1,0 +1,110 @@
+[
+  {
+    "id": "txn_1697123456789_abc123",
+    "description": "Lunch at campus cafeteria",
+    "amount": 12.50,
+    "category": "Food",
+    "date": "2025-10-01",
+    "createdAt": "2025-10-01T12:00:00.000Z",
+    "updatedAt": "2025-10-01T12:00:00.000Z"
+  },
+  {
+    "id": "txn_1697123456790_def456",
+    "description": "Chemistry textbook",
+    "amount": 89.99,
+    "category": "Books",
+    "date": "2025-09-28",
+    "createdAt": "2025-09-28T10:30:00.000Z",
+    "updatedAt": "2025-09-28T10:30:00.000Z"
+  },
+  {
+    "id": "txn_1697123456791_ghi789",
+    "description": "Monthly bus pass",
+    "amount": 45.00,
+    "category": "Transport",
+    "date": "2025-09-25",
+    "createdAt": "2025-09-25T08:15:00.000Z",
+    "updatedAt": "2025-09-25T08:15:00.000Z"
+  },
+  {
+    "id": "txn_1697123456792_jkl012",
+    "description": "Coffee with friends",
+    "amount": 8.75,
+    "category": "Entertainment",
+    "date": "2025-10-10",
+    "createdAt": "2025-10-10T16:45:00.000Z",
+    "updatedAt": "2025-10-10T16:45:00.000Z"
+  },
+  {
+    "id": "txn_1697123456793_mno345",
+    "description": "Semester registration fees",
+    "amount": 250.00,
+    "category": "Fees",
+    "date": "2025-09-20",
+    "createdAt": "2025-09-20T09:00:00.000Z",
+    "updatedAt": "2025-09-20T09:00:00.000Z"
+  },
+  {
+    "id": "txn_1697123456794_pqr678",
+    "description": "Movie tickets",
+    "amount": 15.50,
+    "category": "Entertainment",
+    "date": "2025-10-08",
+    "createdAt": "2025-10-08T19:30:00.000Z",
+    "updatedAt": "2025-10-08T19:30:00.000Z"
+  },
+  {
+    "id": "txn_1697123456795_stu901",
+    "description": "Grocery shopping",
+    "amount": 42.35,
+    "category": "Food",
+    "date": "2025-10-05",
+    "createdAt": "2025-10-05T14:20:00.000Z",
+    "updatedAt": "2025-10-05T14:20:00.000Z"
+  },
+  {
+    "id": "txn_1697123456796_vwx234",
+    "description": "Python programming book",
+    "amount": 65.00,
+    "category": "Books",
+    "date": "2025-09-30",
+    "createdAt": "2025-09-30T11:00:00.000Z",
+    "updatedAt": "2025-09-30T11:00:00.000Z"
+  },
+  {
+    "id": "txn_1697123456797_yza567",
+    "description": "Taxi to airport",
+    "amount": 28.00,
+    "category": "Transport",
+    "date": "2025-10-12",
+    "createdAt": "2025-10-12T06:30:00.000Z",
+    "updatedAt": "2025-10-12T06:30:00.000Z"
+  },
+  {
+    "id": "txn_1697123456798_bcd890",
+    "description": "Coffee and tea supplies",
+    "amount": 18.99,
+    "category": "Food",
+    "date": "2025-10-15",
+    "createdAt": "2025-10-15T13:45:00.000Z",
+    "updatedAt": "2025-10-15T13:45:00.000Z"
+  },
+  {
+    "id": "txn_1697123456799_efg123",
+    "description": "Concert tickets",
+    "amount": 75.00,
+    "category": "Entertainment",
+    "date": "2025-10-14",
+    "createdAt": "2025-10-14T20:00:00.000Z",
+    "updatedAt": "2025-10-14T20:00:00.000Z"
+  },
+  {
+    "id": "txn_1697123456800_hij456",
+    "description": "Lab equipment supplies",
+    "amount": 32.50,
+    "category": "Other",
+    "date": "2025-10-11",
+    "createdAt": "2025-10-11T10:15:00.000Z",
+    "updatedAt": "2025-10-11T10:15:00.000Z"
+  }
+]
